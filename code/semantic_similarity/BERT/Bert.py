@@ -20,7 +20,7 @@ for item in concepts:
     output2 = model(**encoded_input2)
     list_bert2 = output2[0][:, 0, :].detach().numpy()[0].tolist()
 
-    # 将 list_bert1 和 list_bert2 转换成二维数组
+    # Convert list_bert1 and list_bert2 into two-dimensional arrays
     arr1 = np.array(list_bert1).reshape(1, -1)
     arr2 = np.array(list_bert2).reshape(1, -1)
     similarity = cosine_similarity(arr1, arr2)

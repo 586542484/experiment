@@ -52,7 +52,7 @@ class GraphAttentionLayer(nn.Module):
 
     def _prepare_attentional_mechanism_input(self, Wh):
         N = Wh.size()[0] # number of nodes
-        Wh_repeated_in_chunks = Wh.repeat_interleave(N, dim=0) #相当于Wh.repeat(wLabel, N).view(N*N, -wLabel)
+        Wh_repeated_in_chunks = Wh.repeat_interleave(N, dim=0) #Equivalent to Wh.repeat(wLabel, N).view(N*N, -wLabel)
         Wh_repeated_alternating = Wh.repeat(N, 1)
 
         all_combinations_matrix = torch.cat([Wh_repeated_in_chunks, Wh_repeated_alternating], dim=1)

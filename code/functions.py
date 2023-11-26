@@ -14,33 +14,33 @@ import pickle as pkl
 # for i in t_edges:
 #     edge_list.append((i[0], i[wLabel]))
 #
-# # 得到所有节点的顺序索引
+# # Get the sequential index of all nodes
 # con_list = list(pd.read_csv('data/AL-CPL/dm_concepts.csv', engine='python', encoding='utf-8', header=None)[0])
 # index1 = []
 # for i in con_list:
 #     index1.append(con_list.index(i))
 #
-# # 得到图的邻接矩阵（非对称，有向）
-# G = nx.DiGraph()  # 无多重边有向图
-# G.add_nodes_from(index1)  # 添加多个节点
-# G.add_edges_from(edge_list)  # 添加多条边
-# d_A = nx.to_numpy_matrix(G)  # 生成图的邻接矩阵 numpy
-# adj = sp.csr_matrix(d_A)  # numpy 转换为 稀疏矩阵
+# # Get the adjacency matrix of the graph (asymmetric, directed)
+# G = nx.DiGraph()  # directed graph without multiple edges
+# G.add_nodes_from(index1)  # Add multiple nodes
+# G.add_edges_from(edge_list)  # Add multiple edges
+# d_A = nx.to_numpy_matrix(G)  # Generate adjacency matrix of graph numpy
+# adj = sp.csr_matrix(d_A)  # Convert numpy to sparse matrix
 # jj = adj.todense()
 # df = pd.DataFrame(jj)
 # df.to_csv('data/AL-CPL/dm_0_80/ind.data-mining02.graph', header=None, index=None)
 
-# LK自己划分的训练集 验证集 测试集
+# Divided training set, validation set, test set
 def divide_dataset(df_train, df_train2, df2):
-    # 得到输入VGAE中的adj_train
+    # Get adj_train in input VGAE
     G_matrix = df_train.values
     adj_train = sp.csr_matrix(G_matrix)
 
-    # 得到训练集中所有正例构成的矩阵adj_postrain
+    # Get the matrix adj_postrain composed of all positive examples in the training set
     pos_G = df_train2.values
     adj_postrain = sp.csr_matrix(pos_G)
 
-    # 验证集和测试集
+    # Validation set and test set
     list_1 = df2[['A', 'B']].loc[df2['result'] == 1].to_numpy()
     list_0 = df2[['A', 'B']].loc[df2['result'] == 0].to_numpy()
     list_1_idx = list(range(list_1.shape[0]))

@@ -20,39 +20,6 @@ class MHGAT(nn.Module):
         x = F.dropout(x, self.dropout, training=self.training)
         x = torch.cat([att(x, adj) for att in self.attentions], dim=1)
         return self.fc(x)
-
-#Define fusion fuction
-# class gatedFusion(nn.Module):
-#     def __init__(self, input_feat_dim, dropout, alpha, nheads):
-#         super(gatedFusion, self).__init__()
-#         self.input_feat_dim = input_feat_dim
-#         self.output_feat_dim = input_feat_dim
-#         # self.t_input_dim = t_input_dim
-#
-#         #Dimensions required by fully connected network transformation graph convolution model
-#         self.fc_fusion = fully_connectedLyer(self.input_feat_dim, self.input_feat_dim)
-#
-#         #concept attention
-#         self.gat = MHGAT(self.input_feat_dim, self.output_feat_dim, dropout, alpha, nheads)
-#         #resource attention
-#         # self.text_gat = MHGAT(self.t_input_dim, self.t_input_dim, dropout, alpha, nheads)
-#
-#
-#     def forward(self, x, adj):
-#         #concept attention
-#         concept = self.gat(x, adj)
-#
-#         #resource attention
-#         # gat_text = self.text_gat(t_x, t_adj)
-#
-#         #Concepts are connected to resources through TFIDF features
-#         # c_text = torch.mm(tfidf_x.T, gat_text)
-#
-#         z = torch.sigmoid(torch.add(concept, c_text))
-#         fusion = torch.add(torch.mul(z, concept), torch.mul(wLabel-z, c_text))
-#         fusion = self.fc_fusion(fusion)
-#
-#         return fusion
         
 class GCNModelVAE(nn.Module):
     def __init__(self, input_feat_dim, hidden_dim1, hidden_dim2, dropout, alpha, nheads):

@@ -8,7 +8,7 @@ wikipedia = MediaWiki()
 wikipedia.set_api_url(api_url='https://{lang}.wikipedia.org/w/api.php', lang='zh')
 
 # d = pd.read_csv(r'D:\Code\PycharmProjects\LK_project\LK_实验改进\词嵌入\AL-CPL\data_mining.csv', usecols=['A', 'B'], nrows=30)
-d = pd.read_excel('../CH-ALCPL-非传递性-非对称性.xlsx', sheet_name='pr', usecols=['A', 'B'])
+d = pd.read_excel('../CH-ALCPL-non-transitive-asymmetry.xlsx', sheet_name='pr', usecols=['A', 'B'])
 # concepts = d.values.tolist()[0:1000]
 concepts = d.values.tolist()[1000:1758]
 # print(concepts)
@@ -16,7 +16,7 @@ concepts = d.values.tolist()[1000:1758]
 # print(wikipedia.page('DBSCAN').backlinks)
 # print(len(wikipedia.page('DBSCAN').backlinks))
 
-# 英文维基百科词条总数：6,641,740
+# Total number of English Wikipedia entries：6,641,740
 PMI_count = []
 count = 0
 for i in concepts:
@@ -40,7 +40,7 @@ for i in concepts:
     count = count + 1
     print(count)
 
-# 归一化处理
+# Normalization
 max_value = max(PMI_count)
 min_value = min(PMI_count)
 PMI_normal = [(i - min_value) / (max_value - min_value) for i in PMI_count]

@@ -15,7 +15,7 @@ concepts = d.values.tolist()[850:1681]
 # print(wikipedia.page('DBSCAN').backlinks)
 # print(len(wikipedia.page('DBSCAN').backlinks))
 
-# 英文维基百科词条总数：6,641,740
+# Total number of English Wikipedia entries：6,641,740
 PMI_count = []
 count = 0
 for i in concepts:
@@ -39,7 +39,7 @@ for i in concepts:
     count = count + 1
     print(count)
 
-# 归一化处理
+# Normalization
 # max_value = max(PMI_count)
 # min_value = min(PMI_count)
 # PMI_normal = [(i - min_value) / (max_value - min_value) for i in PMI_count]

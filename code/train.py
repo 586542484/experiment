@@ -44,16 +44,15 @@ def gae_for(args, seed_num):
     np.random.seed(seed_num)
     print("Using {} dataset".format(args.dataset_str))
     adj, features = load_data(args.dataset_str)
-    # t_adj, t_features, tfidf_feature = read_text_data(args.dataset_str)  # 文本特征与矩阵
+
     n_nodes, feat_dim = features.shape
-    # t_n_nodes, t_feat_dim = t_features.shape
 
     # Store original adjacency matrix (without diagonal entries) for later
     adj_orig = adj
     adj_orig = adj_orig - sp.dia_matrix((adj_orig.diagonal()[np.newaxis, :], [0]), shape=adj_orig.shape)
     adj_orig.eliminate_zeros()
 
-    # lk按照弱标签切分的数据集
+    # Dataset divided by weak labels
     df = pd.read_csv(
         r'D:\Code\PycharmProjects\LK_project\MHAVGAE-main\semantic_similarity\wLabel(PMI+BERT)\测试一个领域(bert前300词+PMI弱标签)\Label_30%\ind.precalculus.up.graph',
         header=None)
@@ -73,18 +72,14 @@ def gae_for(args, seed_num):
     adj_train_up, adj_postrain_up, test_edges, test_edges_false = divide_dataset(df, df1, df2)
     adj_train_down, adj_postrain_down, test_edges2, test_edges_false2 = divide_dataset(df3, df4, df2)
 
-    # adj_train, train_edges, val_edges, val_edges_false, test_edges, test_edges_false = mask_test_edges(adj)
     adj_up = adj_train_up
     adj_down = adj_train_down
 
-    # Some preprocessing
-    # t_adj_norm = preprocess_graph(t_adj) #进行归一化处理
-    adj_norm_up = preprocess_graph(adj_up)  # 进行归一化处理
+    adj_norm_up = preprocess_graph(adj_up)  # perform normalization processing
     adj_norm_down = preprocess_graph(adj_down)
     adj_label_up = adj_postrain_up + sp.eye(adj_postrain_up.shape[0])
     adj_label_down = adj_postrain_down + sp.eye(adj_postrain_down.shape[0])
-    # adj_label = adj_train + sp.eye(adj_train.shape[0])
-    # adj_label = sparse_to_tuple(adj_label)
+
     adj_label_up = torch.FloatTensor(adj_label_up.toarray())
     adj_label_down = torch.FloatTensor(adj_label_down.toarray())
 
@@ -179,48 +174,4 @@ if __name__ == '__main__':
     print('recall_score: ', float('%.4f' % re))
     print('Test f1 score: ', float('%.4f' %F1))  
     print('Test auc score: ', float('%.4f' %roc_score))
-
-    # dfx = pd.DataFrame(preds_all_temp)
-    # dfx.to_excel('预测标签.xlsx', header=None, index=None)
-
-    # print(float('%.4f' % ACC))
-    # print(float('%.4f' % pre))
-    # print(float('%.4f' % re))
-    # print(float('%.4f' % F1))
-    # print('Test map_score score: ', float('%.4f' %ap_score))
-    # print(float('%.4f' % roc_score))
-    # print(hidden_emb)
-    # adj_rec = np.dot(hidden_emb, hidden_emb.T)
-    # df = pd.DataFrame(adj_rec)
-    # df.to_excel('bbb.xlsx')
-
-    # reconstrution_thr = np.arange(0.wLabel, wLabel, 0.wLabel)
-    # for thr in reconstrution_thr:
-    #     preds_all_temp[preds_all_temp >= thr] = wLabel
-    #     preds_all_temp[preds_all_temp < thr] = 0
-    #
-    #     ACC = accuracy_score(labels_all, preds_all_temp)
-    #     F1 = f1_score(labels_all, preds_all_temp)
-    #     pre = precision_score(labels_all, preds_all_temp)
-    #     re = recall_score(labels_all, preds_all_temp)
-    #
-    #     print('分类阈值：', thr)
-    #     print('Test acc score: ', float('%.4f' %ACC))
-    #     print('Test f1 score: ', float('%.4f' %F1))
-    #     print('Test precision score: ', float('%.4f' %pre))
-    #     print('recall_score: ', float('%.4f' % re))
-    #     # print('Test map_score score: ', float('%.4f' %ap_score))
-    #     print('Test auc score: ', float('%.4f' %roc_score))
-
-    # scaler = MinMaxScaler()  # 实例化
-    # scaler = scaler.fit(adj_rec)  # fit，在这里本质是生成min(x)和max(x)
-    # result = scaler.transform(adj_rec)  # 通过接口导出结果
-
-    # scaler = StandardScaler()
-    # result = scaler.fit_transform(adj_rec)
-    #
-    # print(result.shape)
-    # df = pd.DataFrame(adj_rec)
-    # df.to_excel('重构矩阵.xlsx', header=None, index=None)
-
 

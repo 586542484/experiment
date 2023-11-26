@@ -12,7 +12,7 @@ concepts = list(pd.read_csv(url, header=None)[0])
 
 conceptContent_dict = {}
 count = 0
-for i in concepts:    # 遍历所有概念
+for i in concepts:    # Go through all concepts
     try:
         conceptContent_dict[i] = wikipedia.page(i).content
         count += 1
