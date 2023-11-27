@@ -7,7 +7,7 @@ url = r'D:\Code\PycharmProjects\LK_project\MHAVGAE-main\data\AL-CPL\dm_concepts.
 
 concepts = list(pd.read_csv(url, header=None)[0])
 
-with open(r'D:\Code\PycharmProjects\LK_project\MHAVGAE-main\data\BERT\概念content保存\dm_conceptContent.json') as read_file:
+with open(r'D:\Code\PycharmProjects\LK_project\MHAVGAE-main\data\BERT\concept content preservation\dm_conceptContent.json') as read_file:
     data = json.load(read_file)
 
 IndexWords = []
@@ -28,4 +28,4 @@ for i in concepts:
 
 df = pd.DataFrame(
         {'IndexWords': IndexWords})
-df.to_excel('概念前300词/dm_words-300.xlsx')
+df.to_excel('300 words before concept/dm_words-300.xlsx')

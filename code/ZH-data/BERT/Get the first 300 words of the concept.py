@@ -8,7 +8,7 @@ url = '../pr_concepts.csv'
 
 concepts = list(pd.read_csv(url, header=None)[0])
 
-with codecs.open('概念content保存/pr_conceptContent.json', encoding='utf-8') as read_file:
+with codecs.open('concept content preservation/pr_conceptContent.json', encoding='utf-8') as read_file:
     data = json.load(read_file)
 
 IndexWords = []
@@ -22,5 +22,5 @@ for i in concepts:
    IndexWords.append(s)
 
 df = pd.DataFrame({'IndexWords': IndexWords})
-df.to_excel('概念前300词/pr_words-300.xlsx')
+df.to_excel('300 words before concept/pr_words-300.xlsx')
 # print(IndexWords)

@@ -1,7 +1,7 @@
 import pandas as pd
 from transformers import BertTokenizer, BertModel
 
-url = '概念前300词/dm_words-300.xlsx'
+url = '300 words before concept/dm_words-300.xlsx'
 data = pd.read_excel(url)
 col_1 = data["IndexWords"]
 list1 = col_1.values.tolist()

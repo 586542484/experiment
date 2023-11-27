@@ -24,10 +24,10 @@ for i in concepts:    # Go through all concepts
         count += 1
         print(count)
 
-with open(r'D:\Code\PycharmProjects\LK_project\MHAVGAE-main\data\BERT\概念content保存\dm_conceptContent.json', 'w') as outfile:
+with open(r'D:\Code\PycharmProjects\LK_project\MHAVGAE-main\data\BERT\concept content preservation\dm_conceptContent.json', 'w') as outfile:
     json.dump(conceptContent_dict, outfile)
 
-# with open(r'D:\Code\PycharmProjects\LK_project\MHAVGAE-main\data\BERT\概念content保存\pre_conceptContent.json', 'rb') as read_file:
+# with open(r'D:\Code\PycharmProjects\LK_project\MHAVGAE-main\data\BERT\concept content preservation\pre_conceptContent.json', 'rb') as read_file:
 #     data = json.load(read_file)
 
 # listall = data.keys()
@@ -41,7 +41,7 @@ with open(r'D:\Code\PycharmProjects\LK_project\MHAVGAE-main\data\BERT\概念cont
 #         data[i] = data[s]
 #
 # print(len(data))
-# with open(r'D:\Code\PycharmProjects\LK_project\MHAVGAE-main\data\BERT\概念content保存\pre_conceptContentAll.json', 'w') as outfile:
+# with open(r'D:\Code\PycharmProjects\LK_project\MHAVGAE-main\data\BERT\concept content preservation\pre_conceptContentAll.json', 'w') as outfile:
 #     json.dump(data, outfile)
 
 
